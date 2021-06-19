@@ -1,29 +1,32 @@
 import ExpenseItem from "../ExpenseItem/ExpenseItem";
 import Card from "../../UI/Card";
 
-const ExpenseList = (props) => {
-  const filteredExpenses = props.expenses.filter((expense) => {
-    return expense.date.getFullYear().toString() === props.selectedYear;
+const ExpenseList = ({ expenses, selectedYear }) => {
+  const filteredExpenses = expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === selectedYear;
   });
-  let expenseItems = (
-    <Card className="expenses">
-      <h2 style={{ color: "#fff" }}>No expense items in this year</h2>
-    </Card>
-  );
 
-  if (filteredExpenses.length) {
-    expenseItems = filteredExpenses.map((expense) => {
-      return (
-        <div key={expense.id}>
-          <Card className="expenses">
-            <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} />
-          </Card>
-        </div>
-      );
-    });
+  if (!filteredExpenses.length) {
+    return (
+      <Card className="expenses">
+        <h2 style={{ color: "#fff" }}>No expense items in this year</h2>
+      </Card>
+    );
   }
 
-  return <div>{expenseItems}</div>;
+  return (
+    <div>
+      {filteredExpenses.map((expense) => {
+        return (
+          <div key={expense.id}>
+            <Card className="expenses">
+              <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} />
+            </Card>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default ExpenseList;

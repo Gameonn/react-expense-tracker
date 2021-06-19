@@ -59,7 +59,20 @@
   width: 20rem;
   max-width: 100%;
 }
+.new-expense__control.invalid input {
+  border-color: red;
+  background: #ffd7d7;
+}
+.new-expense__control.invalid label {
+  color: red;
+}
 
 .new-expense__actions {
   text-align: right;
+}
+@media (max-width: 680px) {
+  .new-expense {
+    width: auto;
+    background: sandybrown;
+  }
 }
